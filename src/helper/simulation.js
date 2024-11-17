@@ -1,62 +1,82 @@
-const simulateEnergy = (solarData, windData) => {
-  // Constants
-  const panelArea = 10; // m²
-  const panelEfficiency = 0.15; // 15%
+// Fixed constants
+const solarPanelArea = 10; // m^2
+const solarEfficiency = 0.2; // 20% efficiency
+const turbineArea = 15; // m^2 for turbine
+const airDensity = 1.225; // kg/m^3
+const coalCO2EmissionFactor = 0.9; // kg CO2/kWh for coal-fired plants
+const gasCO2EmissionFactor = 0.4; // kg CO2/kWh for gas-fired plants
 
-  const rotorRadius = 2; // m
-  const turbineEfficiency = 0.4; // 40%
-  const airDensity = 1.225; // kg/m³
-  const rotorArea = Math.PI * Math.pow(rotorRadius, 2); // Area of wind rotor
+export const calculateTotalSolarEnergy = (solarData) => {
+  let totalSolarEnergy = 0; // in Wh
+  for (let time in solarData) {
+    totalSolarEnergy += solarData[time]; // Wh/m^2
+  }
+  totalSolarEnergy *= solarPanelArea * solarEfficiency; // Total in Wh
+  return totalSolarEnergy.toFixed(2);
+};
 
-  let totalSolarEnergy = 0; // Wh
-  let totalWindEnergy = 0; // Wh
+export const calculateTotalWindEnergy = (windData) => {
+  let totalWindEnergy = 0; // in Wh
+  for (let time in windData) {
+    let windSpeed = windData[time]; // m/s
+    let power = 0.5 * airDensity * turbineArea * Math.pow(windSpeed, 3); // Power in W
+    totalWindEnergy += power / 1000; // Convert W to kW for Wh (1 hour)
+  }
+  return (totalWindEnergy * 24).toFixed(2); // Convert to Wh for the whole day
+};
 
-  for (const hour in solarData) {
-    // Solar Energy Simulation
-    const solarIrradiance = solarData[hour]; // Wh/m²
-    const solarEnergy = solarIrradiance * panelArea * panelEfficiency;
-    totalSolarEnergy += solarEnergy;
+export const divideIntoSeasons = (solarData, windData) => {
+  const seasons = {
+    summer: { solar: 0, wind: 0 },
+    fall: { solar: 0, wind: 0 },
+    winter: { solar: 0, wind: 0 },
+    spring: { solar: 0, wind: 0 },
+  };
 
-    // Wind Energy Simulation
-    const windSpeed = windData[hour]; // m/s
-    const windPower = 0.5 * airDensity * rotorArea * Math.pow(windSpeed, 3) * turbineEfficiency; // Power in W
-    const windEnergy = windPower; // Since it's for 1 hour, Energy (Wh) = Power (W) * 1 hour
-    totalWindEnergy += windEnergy;
+  const getSeason = (date) => {
+    const month = date.getMonth() + 1; // Get the month (1-based)
+    const day = date.getDate();
+
+    if ((month === 12 && day >= 21) || (month >= 1 && month <= 3) || (month === 3 && day <= 20)) {
+      return "summer";
+    } else if ((month >= 3 && month <= 6) || (month === 6 && day <= 20)) {
+      return "fall";
+    } else if ((month >= 6 && month <= 9) || (month === 9 && day <= 22)) {
+      return "winter";
+    } else {
+      return "spring";
+    }
+  };
+
+  for (let time in solarData) {
+    const date = new Date(time.substr(0, 4), parseInt(time.substr(4, 2)) - 1, time.substr(6, 2), time.substr(8, 2)); // Construct Date object
+    const season = getSeason(date);
+
+    seasons[season].solar += solarData[time];
+    seasons[season].wind += windData[time];
   }
 
-  return {
-    totalSolarEnergy, // Total Solar Energy in Wh
-    totalWindEnergy, // Total Wind Energy in Wh
-  };
+  const formattedSeasons = {};
+  for (let season in seasons) {
+    formattedSeasons[season] = {
+      solarWh: seasons[season].solar.toFixed(2),
+      windWh: seasons[season].wind.toFixed(2),
+      solarKWh: (seasons[season].solar / 1000).toFixed(2),
+      windKWh: (seasons[season].wind / 1000).toFixed(2),
+    };
+  }
+
+  return formattedSeasons;
 };
 
-// Sample JSON Data
-const solarData = {
-  2023010100: 0,
-  2023010101: 0,
-  2023010102: 0,
-  2023010103: 0,
-  2023010104: 0,
-  2023010105: 13.71,
-  2023010106: 112.81,
-  // Add the rest...
-  2023010111: 596.73,
-  2023010112: 584.34,
+export const calculateCO2EmissionsAvoided = (solarEnergyKWh, windEnergyKWh) => {
+  const solarCO2 = (solarEnergyKWh * coalCO2EmissionFactor).toFixed(2);
+  const windCO2 = (windEnergyKWh * gasCO2EmissionFactor).toFixed(2);
+  return { solarCO2, windCO2 };
 };
 
-const windData = {
-  2023010100: 4.51,
-  2023010101: 4.28,
-  2023010102: 4.48,
-  2023010103: 4.45,
-  2023010104: 4.26,
-  2023010105: 4.17,
-  // Add the rest...
-  2023010111: 3.09,
-  2023010112: 2.79,
+// Function to calculate payback period
+export const calculatePaybackPeriod = (initialInvestment, annualSavings) => {
+  const paybackPeriod = (initialInvestment / annualSavings).toFixed(2); // in years
+  return paybackPeriod;
 };
-
-const results = simulateEnergy(solarData, windData);
-
-console.log("Total Solar Energy Generated:", results.totalSolarEnergy, "Wh");
-console.log("Total Wind Energy Generated:", results.totalWindEnergy, "Wh");
