@@ -4,10 +4,8 @@ import Mapa from "../../map";
 import SolarChart from "../../components/solar-chart";
 import WindChart from "../../components/wind-chart";
 import ResultsSummary from "../../components/results-summary";
-// import SimulationResults from "./components/simulation-results";
 import SimulationResults from "../../components/simulation-results";
 import ErrorBoundary from "../../components/error-boundary";
-import numeral from "numeral";
 import {
   calculateTotalSolarEnergy,
   calculateTotalWindEnergy,
