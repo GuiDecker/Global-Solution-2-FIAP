@@ -141,10 +141,10 @@ export const EnergySimulation = () => {
         onClose={() => setSimulacao(null)}
         sx={{
           "& .MuiDrawer-paper": {
-            width: "526.29px",
-            height: "655px",
+            width: "620px",
+            height: "800px",
             position: "fixed",
-            top: "calc(50vh - 350px)",
+            top: "calc(50vh - 500px)",
             right: "50px",
             margin: "auto",
             borderRadius: "8px",
@@ -164,7 +164,7 @@ export const EnergySimulation = () => {
         }}
       >
         <Box p={2} sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Typography variant="h6">Simulation Results</Typography>
+          <Typography variant="h6">Resultados da simulação</Typography>
           <IconButton onClick={() => setSimulacao(null)} sx={{ color: "#000" }}>
             <CloseIcon />
           </IconButton>
