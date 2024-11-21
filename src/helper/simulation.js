@@ -27,10 +27,10 @@ export const calculateTotalWindEnergy = (windData) => {
 
 export const divideIntoSeasons = (solarData, windData) => {
   const seasons = {
-    summer: { solar: 0, wind: 0 },
-    fall: { solar: 0, wind: 0 },
-    winter: { solar: 0, wind: 0 },
-    spring: { solar: 0, wind: 0 },
+    verao: { solar: 0, wind: 0 },
+    outono: { solar: 0, wind: 0 },
+    inverno: { solar: 0, wind: 0 },
+    primavera: { solar: 0, wind: 0 },
   };
 
   const getSeason = (date) => {
@@ -38,13 +38,13 @@ export const divideIntoSeasons = (solarData, windData) => {
     const day = date.getDate();
 
     if ((month === 12 && day >= 21) || (month >= 1 && month <= 3) || (month === 3 && day <= 20)) {
-      return "summer";
+      return "verao";
     } else if ((month >= 3 && month <= 6) || (month === 6 && day <= 20)) {
-      return "fall";
+      return "outono";
     } else if ((month >= 6 && month <= 9) || (month === 9 && day <= 22)) {
-      return "winter";
+      return "inverno";
     } else {
-      return "spring";
+      return "primavera";
     }
   };
 
