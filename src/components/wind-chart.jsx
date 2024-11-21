@@ -1,7 +1,9 @@
+import { Box, IconButton, Typography } from "@mui/material";
 import React from "react";
+import CloseIcon from "@mui/icons-material/Close";
 import { Line } from "react-chartjs-2";
 
-const WindChart = ({ windData }) => {
+const WindChart = ({ windData, onClose }) => {
   const labels = Object.keys(windData);
   const values = Object.values(windData);
 
@@ -19,10 +21,23 @@ const WindChart = ({ windData }) => {
   };
 
   return (
-    <div style={{ margin: "20px 0" }}>
-      <h3>Wind Energy Simulation</h3>
+    <Box style={{ margin: "20px 0" }}>
+      <Box
+        p={2}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          zIndex: 1,
+        }}
+      >
+        <Typography variant="h6">Média energia eólica da região</Typography>
+        <IconButton onClick={onClose} sx={{ color: "#000" }}>
+          <CloseIcon />
+        </IconButton>
+      </Box>
       <Line data={data} />
-    </div>
+    </Box>
   );
 };
 

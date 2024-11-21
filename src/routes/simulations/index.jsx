@@ -3,7 +3,19 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaf
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import logo from "../../assets/full-logo-veridis-removebg-enhanced.png";
-import { Drawer, Box, Typography, AppBar, Toolbar, IconButton } from "@mui/material";
+import {
+  Drawer,
+  Box,
+  Typography,
+  AppBar,
+  Button,
+  Modal,
+  Backdrop,
+  Fade,
+  Toolbar,
+  IconButton,
+  Chip,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import {
@@ -14,6 +26,9 @@ import {
   divideIntoSeasons,
 } from "../../helper/simulation";
 import ResultsSummary from "../../components/results-summary";
+import SolarChart from "../../components/solar-chart";
+import WindChart from "../../components/wind-chart";
+import SimulationResults from "../../components/simulation-results";
 
 const Header = () => {
   return (
@@ -68,13 +83,24 @@ const Mapa = ({ onClickMapa }) => {
 
 export const EnergySimulation = () => {
   const [simulacao, setSimulacao] = useState(null);
+  const [currentChart, setCurrentChart] = useState(null); // "solar" or "wind" to control modal content
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for the modal
+
+  const handleOpenModal = (chartType) => {
+    setCurrentChart(chartType);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setCurrentChart(null);
+  };
 
   const initialInvestmentSolar = 12000;
   const initialInvestmentWind = 15000;
   const energyCostPerKWh = 0.15;
 
   const handleMapaClick = async (lat, lng) => {
-    console.log("lat", lat, "\nlng", lng);
     try {
       const response = await axios.get(`https://power.larc.nasa.gov/api/temporal/hourly/point`, {
         params: {
@@ -149,7 +175,34 @@ export const EnergySimulation = () => {
             margin: "auto",
             borderRadius: "8px",
             boxShadow: "0 4px 16px rgba(0, 0, 0, 0.2)",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
+          },
+        }}
+      >
+        <Box
+          p={2}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            backgroundColor: "#fff",
+            zIndex: 1,
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <Typography variant="h6">Resultados da simulação</Typography>
+          <IconButton onClick={() => setSimulacao(null)} sx={{ color: "#000" }}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+
+        <Box
+          sx={{
+            flex: 1,
             overflowY: "auto",
+            padding: 2,
             "&::-webkit-scrollbar": {
               width: "8px",
             },
@@ -160,29 +213,75 @@ export const EnergySimulation = () => {
             "&::-webkit-scrollbar-track": {
               backgroundColor: "#EEEEEE",
             },
-          },
-        }}
-      >
-        <Box p={2} sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Typography variant="h6">Resultados da simulação</Typography>
-          <IconButton onClick={() => setSimulacao(null)} sx={{ color: "#000" }}>
-            <CloseIcon />
-          </IconButton>
-        </Box>
-
-        <Box p={2}>
+          }}
+        >
           {simulacao && (
-            <ResultsSummary
-              results={simulacao.results}
-              seasonData={simulacao.seasonData}
-              solarCO2={simulacao.solarCO2}
-              windCO2={simulacao.windCO2}
-              paybackSolar={simulacao.paybackSolar}
-              paybackWind={simulacao.paybackWind}
-            />
+            <>
+              <ResultsSummary
+                results={simulacao.results}
+                seasonData={simulacao.seasonData}
+                solarCO2={simulacao.solarCO2}
+                windCO2={simulacao.windCO2}
+                paybackSolar={simulacao.paybackSolar}
+                paybackWind={simulacao.paybackWind}
+              />
+
+              <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+                <Button variant="contained" color="primary" onClick={() => handleOpenModal("solar")}>
+                  View Solar Chart
+                </Button>
+                <Button variant="contained" color="secondary" onClick={() => handleOpenModal("wind")}>
+                  View Wind Chart
+                </Button>
+              </Box>
+              <SimulationResults results={simulacao} />
+            </>
           )}
         </Box>
       </Drawer>
+
+      {/* Shared Modal */}
+      <Modal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{ timeout: 500 }}
+      >
+        <Fade in={isModalOpen}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "80%",
+              backgroundColor: "white",
+              borderRadius: "8px",
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            <Box sx={{ display: "flex", justifyContent: "center", mb: 2, gap: 2 }}>
+              <Chip
+                label="Solar Chart"
+                onClick={() => setCurrentChart("solar")}
+                color={currentChart === "solar" ? "primary" : "default"}
+              />
+              <Chip
+                label="Wind Chart"
+                onClick={() => setCurrentChart("wind")}
+                color={currentChart === "wind" ? "secondary" : "default"}
+              />
+            </Box>
+            {currentChart === "solar" ? (
+              <SolarChart solarData={simulacao?.solarData} onClose={handleCloseModal} />
+            ) : (
+              <WindChart windData={simulacao?.windData} onClose={handleCloseModal} />
+            )}
+          </Box>
+        </Fade>
+      </Modal>
     </div>
   );
 };

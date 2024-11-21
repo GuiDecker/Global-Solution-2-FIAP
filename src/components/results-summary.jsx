@@ -1,6 +1,6 @@
 import React from "react";
 import numeral from "numeral";
-import { Box, Typography, Grid, Divider } from "@mui/material";
+import { Box, Typography, Grid, Divider, Button } from "@mui/material";
 import SunIcon from "../assets/icons/solar/sun-icon.jsx";
 import TotalEnergySolarIcon from "../assets/icons/solar/total-energy-solar-icon.jsx";
 import ReducaoCoSolarIcon from "../assets/icons/solar/reducao-co-solar-icon.jsx";
@@ -52,7 +52,15 @@ const getWindSeasonIcon = (season) => {
   }
 };
 
-const ResultsSummary = ({ results, seasonData, solarCO2, windCO2, paybackSolar, paybackWind }) => {
+const ResultsSummary = ({
+  results,
+  seasonData,
+  solarCO2,
+  windCO2,
+  paybackSolar,
+  paybackWind,
+  handleOpenModalChart,
+}) => {
   const formattedSolarEnergyWh = numeral(results.totalSolarEnergy).format("0,0");
   const formattedSolarEnergyKWh = numeral(results.totalSolarEnergy / 1000).format("0,0.00");
   const formattedWindEnergyWh = numeral(results.totalWindEnergy).format("0,0");
@@ -117,6 +125,14 @@ const ResultsSummary = ({ results, seasonData, solarCO2, windCO2, paybackSolar, 
                   </Box>
                 </div>
               ))}
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ bgcolor: "#d0d003", color: "white", fontWeight: "bold" }}
+                onClick={handleOpenModalChart}
+              >
+                View Solar Chart
+              </Button>
             </Grid>
           </Grid>
         </Box>
@@ -179,6 +195,14 @@ const ResultsSummary = ({ results, seasonData, solarCO2, windCO2, paybackSolar, 
                   </Box>
                 </div>
               ))}
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ color: "white", fontWeight: "bold" }}
+                onClick={handleOpenModalChart}
+              >
+                View Wind Chart
+              </Button>
             </Grid>
           </Grid>
         </Box>
