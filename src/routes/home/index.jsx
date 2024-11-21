@@ -232,12 +232,13 @@ function Home() {
             linkedin="https://www.linkedin.com/in/giulia-pirolo-a018b824a/"
             github="https://github.com/Giulia-pirolo"
           />
+
           <TeamCard
             name="Felipe Alberto Oliveira dos Santos"
             rm="557348"
             image={felipeImage}
-            linkedin="https://www.linkedin.com/in/felipe-alberto-8b01a2268'
-            github= "https://github.com/felipalb"
+            linkedin="https://www.linkedin.com/in/felipe-alberto-8b01a2268"
+            github="https://github.com/felipalb"
           />
         </div>
       </div>
