@@ -208,8 +208,8 @@ function Home() {
             name="Ana Clara Santos Moreira"
             rm="558786"
             image={anaImage}
-            // linkedin={}
-            // github={}
+            linkedin="https://www.linkedin.com/in/ana-clara-santos-moreira-066968159/"
+            github="https://github.com/AnaClaraSM"
           />
           <TeamCard
             name="Guilherme Barreto Mendes"
@@ -223,7 +223,7 @@ function Home() {
             rm="555442"
             image={bentoImage}
             linkedin="https://www.linkedin.com/in/bentocoutinho?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-            // github={}
+            github="https://github.com/drakonw4"
           />
           <TeamCard
             name="Giulia Milanez Pirolo"
@@ -236,8 +236,8 @@ function Home() {
             name="Felipe Alberto Oliveira dos Santos"
             rm="557348"
             image={felipeImage}
-            // linkedin={}
-            // github={}
+            linkedin="https://www.linkedin.com/in/felipe-alberto-8b01a2268'
+            github= "https://github.com/felipalb"
           />
         </div>
       </div>
