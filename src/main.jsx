@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App.jsx";
 import Home from "./routes/home/index.jsx";
 import Faq from "./routes/faq/index.jsx";
+import Faq from "./routes/faqF/index.jsx";
+import Faq from "./routes/faqAdjusts/index.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { EnergySimulation } from "./routes/simulations/index.jsx";
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />;
@@ -16,6 +18,8 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/energy-simulation", element: <EnergySimulation /> },
       { path: "/faq", element: <Faq /> },
+      { path: "/faq", element: <FaqF /> },
+      { path: "/faq", element: <FaqAdjusts /> },
     ],
   },
 ]);
