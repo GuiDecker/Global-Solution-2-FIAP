@@ -86,26 +86,25 @@ function Home() {
   };
 
   return (
-    <div className="container-total" style={{ flex: 1 }}>
-      {/* Cabeçalho */}
-      {/* <header className="header" style={gradientStyle}>
-        <h1 className="title" style={{ fontWeight: 'bold', fontSize: '40px' }}>
-          VERIDIS
-        </h1>
-      </header> */}
-
-      {/* Simulação */}
+    <div
+      className="container-total"
+      style={{
+        flex: 1,
+        overflowX: "hidden", // Prevent horizontal scrolling
+      }}
+    >
       <div className="container-inicio" style={gradientStyle}>
         <h1 className="title" style={{ fontWeight: "bold", fontSize: "40px", color: "#001131" }}>
           VERIDIS
         </h1>
         <section
-          className=" row "
+          className="row"
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             marginLeft: "50px",
+            margin: "0 20px",
           }}
         >
           <div
@@ -159,54 +158,40 @@ function Home() {
               src={imagehome}
               alt="Logo Veridis"
               style={{
-                // maxWidth: '800px',
-                // margin: '20px auto',
-                // display: 'block',
-                // padding: '20px',
                 position: "relative",
                 top: "-100px",
-                right: "0px",
               }}
             />
           </div>
         </section>
       </div>
 
-      {/* Vídeo */}
+      {/* Video */}
       <div
         style={{
           textAlign: "center",
           padding: "20px 20px 120px 20px",
           background: "linear-gradient(to bottom, #FFFFFF, #BFFFE5)",
-          marginTop: "100px",
         }}
       >
         <h2 style={{ color: "#00FF99", fontWeight: "bold" }}>Nosso Projeto</h2>
         <p>Veja a seguir uma breve apresentação do projeto Veridis e de seu funcionamento.</p>
-        <div style={{ marginBottom: "100px !important" }}>
-          <iframe
-            src="https://www.youtube.com/embed/seu-video-id"
-            title="Vídeo Pitch"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{
-              width: "100%",
-              height: "300px",
-              maxWidth: "800px",
-            }}
-          />
-        </div>
+        <iframe
+          src="https://www.youtube.com/embed/seu-video-id"
+          title="Vídeo Pitch"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          style={{
+            width: "100%",
+            height: "300px",
+            maxWidth: "800px",
+          }}
+        />
       </div>
 
       {/* Equipe */}
-      <div
-        style={{
-          padding: "50px 0 !impotant",
-          minHeight: "660px",
-          marginTop: "100px",
-        }}
-      >
+      <div style={{ padding: "50px 0", marginTop: "100px" }}>
         <h2
           style={{
             textAlign: "center",
@@ -256,6 +241,8 @@ function Home() {
           />
         </div>
       </div>
+
+      {/* ========================= */}
 
       <div className="container-faleconosco" style={contatogradientStyle}>
         <div
@@ -411,7 +398,7 @@ function Home() {
         </div>
       </div>
 
-      <footer style={{ textAlign: "center", marginTop: "20px" }}>
+      <footer style={{ textAlign: "center", marginTop: "20px", marginBottom: "160px" }}>
         <p>VERIDIS - Todos direitos reservados.</p>
       </footer>
     </div>
