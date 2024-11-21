@@ -9,9 +9,7 @@ import SummerSolarIcon from "../assets/icons/solar/summer-solar-icon.jsx";
 import FallSolarIcon from "../assets/icons/solar/fall-solar-icon.jsx";
 import WinterSolar from "../assets/icons/solar/winter-solar-icon.jsx";
 import SpringSolarIcon from "../assets/icons/solar/spring-solar-icon.jsx";
-import PanelefiSolarIcon from "../assets/icons/solar/panelefi-solar-icon.jsx";
-import PanelSizeSolarIcon from "../assets/icons/solar/panelsize-solar-icon.jsx";
-// ========================
+
 import WindIcon from "../assets/icons/wind/wind-icon.jsx";
 import TotalEnergyWindIcon from "../assets/icons/wind/total-energy-wind-icon.jsx";
 import ReducaoCoWindIcon from "../assets/icons/wind/reducao-co-wind-icon.jsx";
@@ -20,47 +18,38 @@ import SummerWindIcon from "../assets/icons/wind/summer-wind-icon.jsx";
 import FallWindIcon from "../assets/icons/wind/fall-wind-icon.jsx";
 import WinterWindIcon from "../assets/icons/wind/winter-wind-icon.jsx";
 import SpringWindIcon from "../assets/icons/wind/spring-wind-icon.jsx";
-import EngineSizeWindIcon from "../assets/icons/wind/enginesize-wind-icon.jsx";
-import EngineeficWindIcon from "../assets/icons/wind/engineefic-wind-icon.jsx";
 
 const getSolarSeasonIcon = (season) => {
   switch (season) {
-    case "summer":
+    case "verao":
       return <SummerSolarIcon />;
-    case "fall":
+    case "outono":
       return <FallSolarIcon />;
-    case "winter":
+    case "inverno":
       return <WinterSolar />;
-    case "spring":
+    case "primavera":
       return <SpringSolarIcon />;
     default:
       return null;
   }
 };
+
 const getWindSeasonIcon = (season) => {
   switch (season) {
-    case "summer":
+    case "verao":
       return <SummerWindIcon />;
-    case "fall":
+    case "outono":
       return <FallWindIcon />;
-    case "winter":
+    case "inverno":
       return <WinterWindIcon />;
-    case "spring":
+    case "primavera":
       return <SpringWindIcon />;
     default:
       return null;
   }
 };
 
-const ResultsSummary = ({
-  results,
-  seasonData,
-  solarCO2,
-  windCO2,
-  paybackSolar,
-  paybackWind,
-  handleOpenModalChart,
-}) => {
+const ResultsSummary = ({ results, seasonData, solarCO2, windCO2, paybackSolar, paybackWind, handleOpenModal }) => {
   const formattedSolarEnergyWh = numeral(results.totalSolarEnergy).format("0,0");
   const formattedSolarEnergyKWh = numeral(results.totalSolarEnergy / 1000).format("0,0.00");
   const formattedWindEnergyWh = numeral(results.totalWindEnergy).format("0,0");
@@ -125,14 +114,16 @@ const ResultsSummary = ({
                   </Box>
                 </div>
               ))}
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{ bgcolor: "#d0d003", color: "white", fontWeight: "bold" }}
-                onClick={handleOpenModalChart}
-              >
-                View Solar Chart
-              </Button>
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ bgcolor: "#baba07", color: "white", fontWeight: "bold" }}
+                  onClick={() => handleOpenModal("solar")}
+                >
+                  Gráfico Energia Solar
+                </Button>
+              </Box>
             </Grid>
           </Grid>
         </Box>
@@ -195,14 +186,16 @@ const ResultsSummary = ({
                   </Box>
                 </div>
               ))}
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{ color: "white", fontWeight: "bold" }}
-                onClick={handleOpenModalChart}
-              >
-                View Wind Chart
-              </Button>
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ color: "white", fontWeight: "bold" }}
+                  onClick={() => handleOpenModal("wind")}
+                >
+                  Gráfico Energia Eólica
+                </Button>
+              </Box>
             </Grid>
           </Grid>
         </Box>

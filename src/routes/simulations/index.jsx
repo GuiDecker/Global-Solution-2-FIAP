@@ -1,21 +1,7 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
-import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import logo from "../../assets/full-logo-veridis-removebg-enhanced.png";
-import {
-  Drawer,
-  Box,
-  Typography,
-  AppBar,
-  Button,
-  Modal,
-  Backdrop,
-  Fade,
-  Toolbar,
-  IconButton,
-  Chip,
-} from "@mui/material";
+
+import { Drawer, Box, Typography, AppBar, Modal, Backdrop, Fade, Toolbar, IconButton, Chip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import {
@@ -25,66 +11,17 @@ import {
   calculatePaybackPeriod,
   divideIntoSeasons,
 } from "../../helper/simulation";
+import Mapa from "../../map";
+import Header from "../../components/header";
 import ResultsSummary from "../../components/results-summary";
 import SolarChart from "../../components/solar-chart";
 import WindChart from "../../components/wind-chart";
 import SimulationResults from "../../components/simulation-results";
 
-const Header = () => {
-  return (
-    <AppBar
-      position="fixed"
-      sx={{ height: "64px", backgroundColor: "white", boxShadow: "none", borderBottom: "1px solid #ddd" }}
-    >
-      <Toolbar sx={{ height: "100%", display: "flex", alignItems: "center" }}>
-        <img src={logo} alt="Logo" style={{ height: "48px", objectFit: "contain" }} />
-      </Toolbar>
-    </AppBar>
-  );
-};
-
-const Mapa = ({ onClickMapa }) => {
-  const [markerPosition, setMarkerPosition] = useState(null);
-
-  const HandleClick = () => {
-    useMapEvents({
-      click: (e) => {
-        const { lat, lng } = e.latlng;
-        setMarkerPosition({ lat, lng });
-        onClickMapa(lat, lng);
-      },
-    });
-    return null;
-  };
-
-  const redIcon = new Icon({
-    iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32],
-  });
-
-  return (
-    <MapContainer
-      center={[-14.235, -51.9253]}
-      zoom={4}
-      style={{ height: "calc(100vh - 64px)", width: "100vw", position: "fixed", top: "64px", left: 0 }}
-    >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <HandleClick />
-      {markerPosition && (
-        <Marker position={markerPosition} icon={redIcon}>
-          <Popup>Você clicou aqui!</Popup>
-        </Marker>
-      )}
-    </MapContainer>
-  );
-};
-
 export const EnergySimulation = () => {
   const [simulacao, setSimulacao] = useState(null);
   const [currentChart, setCurrentChart] = useState(null); // "solar" or "wind" to control modal content
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = (chartType) => {
     setCurrentChart(chartType);
@@ -167,10 +104,10 @@ export const EnergySimulation = () => {
         onClose={() => setSimulacao(null)}
         sx={{
           "& .MuiDrawer-paper": {
-            width: "620px",
-            height: "800px",
+            width: "650px",
+            height: "820px",
             position: "fixed",
-            top: "calc(50vh - 500px)",
+            top: "calc(50vh - 400px)",
             right: "50px",
             margin: "auto",
             borderRadius: "8px",
@@ -224,23 +161,14 @@ export const EnergySimulation = () => {
                 windCO2={simulacao.windCO2}
                 paybackSolar={simulacao.paybackSolar}
                 paybackWind={simulacao.paybackWind}
+                handleOpenModal={handleOpenModal}
               />
-
-              <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
-                <Button variant="contained" color="primary" onClick={() => handleOpenModal("solar")}>
-                  View Solar Chart
-                </Button>
-                <Button variant="contained" color="secondary" onClick={() => handleOpenModal("wind")}>
-                  View Wind Chart
-                </Button>
-              </Box>
               <SimulationResults results={simulacao} />
             </>
           )}
         </Box>
       </Drawer>
 
-      {/* Shared Modal */}
       <Modal
         open={isModalOpen}
         onClose={handleCloseModal}
@@ -259,17 +187,19 @@ export const EnergySimulation = () => {
               backgroundColor: "white",
               borderRadius: "8px",
               boxShadow: 24,
-              p: 4,
+              padding: 4,
+              maxHeight: "80vh",
+              height: "auto",
             }}
           >
             <Box sx={{ display: "flex", justifyContent: "center", mb: 2, gap: 2 }}>
               <Chip
-                label="Solar Chart"
+                label="Gráfico Solar"
                 onClick={() => setCurrentChart("solar")}
                 color={currentChart === "solar" ? "primary" : "default"}
               />
               <Chip
-                label="Wind Chart"
+                label="Gráfico eólico"
                 onClick={() => setCurrentChart("wind")}
                 color={currentChart === "wind" ? "secondary" : "default"}
               />

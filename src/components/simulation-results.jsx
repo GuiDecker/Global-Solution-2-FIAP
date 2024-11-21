@@ -53,10 +53,11 @@ const SimulationResults = ({ results }) => {
         fontFamily: "Arial, sans-serif",
         alignItems: "center",
         marginTop: "40px",
+        marginBottom: "40px",
       }}
     >
       {/* Centralized Title */}
-      <h3 style={{ textAlign: "center", marginBottom: "10px" }}>Resultados da Simulação</h3>
+      <h3 style={{ textAlign: "center", marginBottom: "10px" }}>Fazer previsões</h3>
 
       {/* Main Container */}
       <div
@@ -76,7 +77,7 @@ const SimulationResults = ({ results }) => {
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <PanelSizeSolarIcon />
             <label style={{ flex: 1 }}>
-              Área do Painel (m²):
+              <b>Área do Painel (m²):</b>
               <input
                 type="number"
                 value={panelArea}
@@ -88,7 +89,7 @@ const SimulationResults = ({ results }) => {
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <PanelefiSolarIcon />
             <label style={{ flex: 1 }}>
-              Eficiência (%):
+              <b>Eficiência (%):</b>
               <input
                 type="number"
                 value={efficiency}
@@ -118,7 +119,7 @@ const SimulationResults = ({ results }) => {
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <EngineSizeWindIcon />
             <label style={{ flex: 1 }}>
-              Raio da Turbina (m):
+              <b>Raio da Turbina (m):</b>
               <input
                 type="number"
                 value={turbineRadius}
