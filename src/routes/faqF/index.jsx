@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./FAQPage.css";
+import "../../styles/FAQF.css";
 
-const FAQPage = () => {
+const FAQF = () => {
     const [activeQuestion, setActiveQuestion] = useState(null);
 
     const toggleQuestion = (index) => {
@@ -49,4 +49,4 @@ const FAQPage = () => {
     );
 };
 
-export default FAQPage;
+export default FAQF;

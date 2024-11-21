@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/FAQadjusts.css";
 
-const FAQ = () => {
+const FaqAdjusts = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleQuestion = (index) => {
@@ -96,4 +96,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ;
+export default FaqAdjusts;
