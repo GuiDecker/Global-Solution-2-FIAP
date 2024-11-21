@@ -6,15 +6,39 @@ import bentoImage from "../../assets/img/bentoImage.jpeg";
 import giuliaImage from "../../assets/img/giuliaImage.jpg";
 import felipeImage from "../../assets/img/felipeImage.jpeg";
 import imagehome from "../../assets/logohome.svg";
+import linkedinimage from "../../assets/Linkedin.svg";
+import githubimage from "../../assets/Github.svg";
 
-function TeamCard({ name, rm, image }) {
+function Icon({ src, alt, size = 24, link = null }) {
+  const style = {
+    width: size,
+    height: size,
+    display: "inline-block",
+    objectFit: "contain",
+    cursor: link ? "pointer" : "default",
+  };
+
+  const iconElement = <img src={src} alt={alt} style={style} />;
+
+  if (link) {
+    return (
+      <a href={link} target="_blank" rel="noopener noreferrer">
+        {iconElement}
+      </a>
+    );
+  }
+
+  return iconElement;
+}
+
+function TeamCard({ name, rm, image, linkedin, github }) {
   return (
     <div
       className="team-card"
       style={{
         height: "35vh",
         borderRadius: "8px",
-        background: "linear-gradient(to top, #FFFFFF, #BFFFE5)",
+        background: "linear-gradient(to top, #ffffff, #00FF99)",
         padding: "20px",
         textAlign: "center",
       }}
@@ -34,6 +58,10 @@ function TeamCard({ name, rm, image }) {
           {name}
         </p>
         <p>RM: {rm}</p>
+        <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+          {linkedin && <Icon src={linkedinimage} alt="LinkedIn Icon" link={linkedin} />}
+          {github && <Icon src={githubimage} alt="GitHub Icon" link={github} />}
+        </div>
       </div>
     </div>
   );
@@ -68,7 +96,7 @@ function Home() {
 
       {/* Simulação */}
       <div className="container-inicio" style={gradientStyle}>
-        <h1 className="title" style={{ fontWeight: "bold", fontSize: "40px" }}>
+        <h1 className="title" style={{ fontWeight: "bold", fontSize: "40px", color: "#001131" }}>
           VERIDIS
         </h1>
         <section
@@ -97,6 +125,7 @@ function Home() {
                   alignItems: "center",
                   justifyContent: "center",
                   textAlign: "center",
+                  color: "#001131",
                 }}
               >
                 Simule. Planeje. Inove!
@@ -107,6 +136,10 @@ function Home() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  fontSize: "20px",
+                  textAlign: "justify",
+                  letterSpacing: "1px",
+                  color: "#001131",
                 }}
               >
                 Explore novas possibilidades com VERIDIS. Com apenas alguns cliques, simule a implementação de energia
@@ -167,7 +200,13 @@ function Home() {
       </div>
 
       {/* Equipe */}
-      <div style={{ padding: "50px 0 !impotant" }}>
+      <div
+        style={{
+          padding: "50px 0 !impotant",
+          minHeight: "660px",
+          marginTop: "100px",
+        }}
+      >
         <h2
           style={{
             textAlign: "center",
@@ -180,22 +219,197 @@ function Home() {
         </h2>
         <p style={{ textAlign: "center", padding: "20px" }}>Conheça os nossos desenvolvedores!</p>
         <div style={responsiveGridStyle}>
-          <TeamCard name="Ana Clara Santos Moreira" rm="558786" image={anaImage} />
-          <TeamCard name="Guilherme Barreto Mendes" rm="557916" image={guilhermeImage} />
-          <TeamCard name="Bento Del Santo Coutinho" rm="555442" image={bentoImage} />
-          <TeamCard name="Giulia Milanez Pirolo" rm="557575" image={giuliaImage} />
-          <TeamCard name="Felipe Alberto Oliveira dos Santos" rm="557348" image={felipeImage} />
+          <TeamCard
+            name="Ana Clara Santos Moreira"
+            rm="558786"
+            image={anaImage}
+            // linkedin={}
+            // github={}
+          />
+          <TeamCard
+            name="Guilherme Barreto Mendes"
+            rm="557916"
+            image={guilhermeImage}
+            linkedin="https://www.linkedin.com/in/guilherme-barreto-mendes"
+            github="https://github.com/GuiDecker"
+          />
+          <TeamCard
+            name="Bento Del Santo Coutinho"
+            rm="555442"
+            image={bentoImage}
+            linkedin="https://www.linkedin.com/in/bentocoutinho?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+            // github={}
+          />
+          <TeamCard
+            name="Giulia Milanez Pirolo"
+            rm="557575"
+            image={giuliaImage}
+            linkedin="https://www.linkedin.com/in/giulia-pirolo-a018b824a/"
+            github="https://github.com/Giulia-pirolo"
+          />
+          <TeamCard
+            name="Felipe Alberto Oliveira dos Santos"
+            rm="557348"
+            image={felipeImage}
+            // linkedin={}
+            // github={}
+          />
         </div>
       </div>
 
       <div className="container-faleconosco" style={contatogradientStyle}>
-        <p>Tem alguma dúvida, comentário ou sugestão?</p>
+        <div
+          className="row"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginLeft: "70px",
+          }}
+        >
+          <div
+            className="col-sm-4"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <p
+                style={{
+                  // padding: '30px',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "20px",
+                  color: "#001131",
+                }}
+              >
+                Tem alguma dúvida, comentário ou sugestão?
+              </p>
 
-        <div className="contato">
-          <h1 style={{ fontWeight: "bold", color: "#001131" }}>Fale Conosco</h1>
+              <div className="contato">
+                <h1
+                  style={{
+                    fontWeight: "bolder",
+                    fontSize: "70px",
+                    color: "#001131",
+                    fontWeight: "bold",
+                    padding: "50px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                  }}
+                >
+                  Fale Conosco
+                </h1>
+              </div>
+
+              <p
+                style={{
+                  // padding: '30px',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "20px",
+                  color: "#001131",
+                }}
+              >
+                Quero ouvir o que você tem a dizer!
+              </p>
+            </div>
+          </div>
+          <div
+            className="col-sm-8"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                maxWidth: "600px",
+                margin: "auto",
+                padding: "50px 70px",
+                borderTopLeftRadius: "30px",
+                borderTopRightRadius: "30px",
+                boxShadow: "0px 2px 10px rgba(0, 0, 0, 0)",
+              }}
+            >
+              <form>
+                <div class="mb-3">
+                  <h3
+                    style={{
+                      fontWeight: "bold",
+                      color: "#00FF99",
+                      textAlign: "center",
+                    }}
+                  >
+                    VERIDIS
+                  </h3>
+                  <label for="exampleInputEmail1" class="form-label" style={{ fontWeight: "bold", color: "#00FF99" }}>
+                    Nome
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    aria-describedby="nameHelp"
+                    style={{ backgroundColor: "#B7FFE6" }}
+                  ></input>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label" style={{ fontWeight: "bold", color: "#00FF99" }}>
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    style={{ backgroundColor: "#B7FFE6" }}
+                  ></input>
+                </div>
+                <div class="mb-3">
+                  <label
+                    for="exampleFormControlTextarea1"
+                    class="form-label"
+                    style={{ fontWeight: "bold", color: "#00FF99" }}
+                  >
+                    Mensagem
+                  </label>
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                    style={{ backgroundColor: "#B7FFE6" }}
+                  ></textarea>
+                </div>
+
+                <div class="d-flex btn-color justify-content-center">
+                  <button
+                    class="form-control mt-3 btn btn-info btn-block btn-lg"
+                    type="submit"
+                    style={{
+                      width: "250px",
+                      height: "50px",
+                      borderRadius: "10px",
+                      backgroundColor: "#00FF99",
+                      color: "#ffffff",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Enviar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-
-        <p>Quero ouvir o que você tem a dizer!</p>
       </div>
 
       <footer style={{ textAlign: "center", marginTop: "20px" }}>
