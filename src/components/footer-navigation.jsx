@@ -10,9 +10,11 @@ const FooterNavigation = () => {
   return (
     <Box
       sx={{
-        position: "absolute",
-        bottom: 50,
-        left: 50,
+        position: "fixed",
+        bottom: 30,
+        // left: "50%",
+        left: 400,
+        transform: "translateX(-50%)",
         width: "100%",
         maxWidth: "600px",
         borderRadius: 4,

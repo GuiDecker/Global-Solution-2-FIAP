@@ -86,7 +86,7 @@ function Home() {
   };
 
   return (
-    <div className="container-total">
+    <div className="container-total" style={{ flex: 1 }}>
       {/* Cabeçalho */}
       {/* <header className="header" style={gradientStyle}>
         <h1 className="title" style={{ fontWeight: 'bold', fontSize: '40px' }}>
@@ -292,7 +292,6 @@ function Home() {
               <div className="contato">
                 <h1
                   style={{
-                    fontWeight: "bolder",
                     fontSize: "70px",
                     color: "#001131",
                     fontWeight: "bold",
