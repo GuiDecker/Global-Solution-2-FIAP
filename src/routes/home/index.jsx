@@ -54,7 +54,7 @@ function TeamCard({ name, rm, image, linkedin, github }) {
         }}
       />
       <div className="text-container">
-        <p className="card-name" style={{ color: "#00FF99", fontWeight: "bold" }}>
+        <p className="card-name" style={{ color: "#06d482", fontWeight: "bold" }}>
           {name}
         </p>
         <p>RM: {rm}</p>
@@ -196,7 +196,7 @@ function Home() {
           style={{
             textAlign: "center",
             padding: "20px",
-            color: "#00FF99",
+            color: "#06e089",
             fontWeight: "bold",
           }}
         >
@@ -400,7 +400,7 @@ function Home() {
       </div>
 
       <footer style={{ textAlign: "center", marginTop: "20px", marginBottom: "160px" }}>
-        <p>VERIDIS - Todos direitos reservados.</p>
+        <p>©️ VERIDIS - Todos os direitos reservados</p>
       </footer>
     </div>
   );
