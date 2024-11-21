@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/FAQ.css";
+import "../../styles/FAQ2.css";
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -88,16 +88,10 @@ const FAQ = () => {
             )}
           </div>
         ))}
-      </div>
       <footer className="faq-footer">
-        <div className="footer-logo">LOGO</div>
-        <div className="footer-menu">
-          <button>Home</button>
-          <button>Simulador</button>
-          <button>FAQ</button>
-        </div>
-        <p>©️ 2024 - Todos os direitos reservados</p>
+        <p>Veridis ©️2024 - Todos os direitos reservados</p>
       </footer>
+      </div>
     </div>
   );
 };
