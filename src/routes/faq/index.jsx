@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const FAQContainer = styled.div`
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   background: linear-gradient(to bottom, #fff, #a2f3a2);
-  // min-height: 100vh;
 
   /* Header */
   h1, h2, h3, h4, h5, h6 {
@@ -15,13 +17,13 @@ const FAQContainer = styled.div`
   }
 `;
 
-const Header = styled.div`
+const Header = styled.header`
   text-align: center;
   margin-bottom: 20px;
 `;
-const LogoHeader = styled.header`
+const LogoHeader = styled.div`
     width: 100%;
-    padding: 10px 20px;
+    padding: 20px 20px 0;
     display: flex;
     // justify-content: center;
     align-items: center;
@@ -49,6 +51,7 @@ const FAQContent = styled.div`
 `;
 
 const FAQItem = styled.div`
+
   width: 100%;
   background: white;
   // border: 1px solid #d9d9d9;
@@ -83,7 +86,7 @@ const Footer = styled.footer`
   // margin-top: 30px;
   text-align: center;
   background: #fff;
-  padding: 20px;
+  padding: 20px 0 10px;
   color: black;
   font-size: 12px;
 `;
@@ -152,7 +155,9 @@ const FAQ = () => {
   return (
     <FAQContainer>
       <LogoHeader>
+        <div>
         <p>VERIDIS</p>
+        </div>
       </ LogoHeader>
       <FAQContent>
       <Header>
@@ -173,7 +178,7 @@ const FAQ = () => {
         ))}
       </FAQContent>
       <Footer>
-        <p>© 2024 - Todos os direitos reservados</p>
+        <p>Veridis ©2024 - Todos os direitos reservados</p>
       </Footer>
     </FAQContainer>
   );
