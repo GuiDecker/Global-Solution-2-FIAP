@@ -1,5 +1,96 @@
 import React, { useState } from "react";
-import "../../styles/FAQ.css";
+import styled from "styled-components";
+
+const FAQContainer = styled.div`
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(to bottom, #fff, #a2f3a2);
+  min-height: 100vh;
+  padding: 20px 10px;
+`;
+
+const Header = styled.header`
+  text-align: center;
+  margin-bottom: 20px;
+`;
+
+const Title = styled.h1`
+  color: #00a368;
+  font-size: 2rem;
+  font-weight: bold;
+`;
+
+const FAQContent = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const FAQItem = styled.div`
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: ${(props) => (props.active ? "0 4px 6px rgba(0, 0, 0, 0.1)" : "none")};
+  transition: all 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+    background: ${(props) => (props.active ? "#e0ffe0" : "#f9f9f9")};
+  }
+`;
+
+const Question = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+`;
+
+const Answer = styled.div`
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+`;
+
+const Footer = styled.footer`
+  margin-top: 30px;
+  text-align: center;
+  background: #00a368;
+  padding: 20px;
+  color: white;
+`;
+
+const FooterLogo = styled.div`
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+const FooterMenu = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+`;
+
+const FooterButton = styled.button`
+  background: white;
+  color: #00a368;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background: #e0ffe0;
+  }
+`;
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -55,50 +146,43 @@ const FAQ = () => {
         "Claro! Entre em contato conosco pelo formulário na página inicial. Valorizamos seu feedback para tornar o simulador ainda melhor.",
     },
     {
-      question: "Quais são os benefícios de usar fontes renováveis além da energia nuclear?",
+      question:
+        "Quais são os benefícios de usar fontes renováveis além da energia nuclear?",
       answer:
         "Fontes renováveis, como solar e eólica, complementam a energia nuclear, fornecendo eletricidade limpa, diversificando a matriz energética e reduzindo dependências de combustíveis fósseis.",
     },
   ];
 
   return (
-    <div className="faq-container">
-      <header className="faq-header">
-        <h1 className="faq-title">Perguntas Frequentes</h1>
-      </header>
-      <div className="faq-content">
+    <FAQContainer>
+      <Header>
+        <Title>Perguntas Frequentes</Title>
+      </Header>
+      <FAQContent>
         {questions.map((item, index) => (
-          <div
+          <FAQItem
             key={index}
-            className={`faq-item ${
-              activeIndex === index ? "active" : ""
-            }`}
+            active={activeIndex === index}
+            onClick={() => toggleQuestion(index)}
           >
-            <div
-              className="faq-question"
-              onClick={() => toggleQuestion(index)}
-            >
+            <Question>
               {item.question}
-              <span className="faq-icon">
-                {activeIndex === index ? "▲" : "▼"}
-              </span>
-            </div>
-            {activeIndex === index && (
-              <div className="faq-answer">{item.answer}</div>
-            )}
-          </div>
+              <span>{activeIndex === index ? "▲" : "▼"}</span>
+            </Question>
+            {activeIndex === index && <Answer>{item.answer}</Answer>}
+          </FAQItem>
         ))}
-      </div>
-      <footer className="faq-footer">
-        <div className="footer-logo">LOGO</div>
-        <div className="footer-menu">
-          <button>Home</button>
-          <button>Simulador</button>
-          <button>FAQ</button>
-        </div>
-        <p>©️ 2024 - Todos os direitos reservados</p>
-      </footer>
-    </div>
+      </FAQContent>
+      <Footer>
+        <FooterLogo>VERIDIS</FooterLogo>
+        <FooterMenu>
+          <FooterButton>Home</FooterButton>
+          <FooterButton>Simulador</FooterButton>
+          <FooterButton>FAQ</FooterButton>
+        </FooterMenu>
+        <p>© 2024 - Todos os direitos reservados</p>
+      </Footer>
+    </FAQContainer>
   );
 };
 
