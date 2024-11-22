@@ -27,13 +27,13 @@ const LogoHeader = styled.header`
     align-items: center;
     background: #FFFFFF;
     color: #00ff99;
-    // font-weight: 800;
+    font-weight: bold;
     font-size: 24px;
     font-family: 'Outfit', sans-serif;
 `;
 
 const Title = styled.h1`
-  color: #00a368;
+  color: #black;
   font-size: 2rem;
   font-weight: bold;
 `;
@@ -49,9 +49,9 @@ const FAQContent = styled.div`
 `;
 
 const FAQItem = styled.div`
-width: 100%;
+  width: 100%;
   background: white;
-  border: 1px solid #d9d9d9;
+  // border: 1px solid #d9d9d9;
   border-radius: 8px;
   padding: 15px;
   box-shadow: ${(props) => (props.active ? "0 4px 6px rgba(0, 0, 0, 0.1)" : "none")};
@@ -80,38 +80,12 @@ const Answer = styled.div`
 `;
 
 const Footer = styled.footer`
-  margin-top: 30px;
+  // margin-top: 30px;
   text-align: center;
-  background: #00a368;
+  background: #fff;
   padding: 20px;
-  color: white;
-`;
-
-const FooterLogo = styled.div`
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
-
-const FooterMenu = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 10px;
-`;
-
-const FooterButton = styled.button`
-  background: white;
-  color: #00a368;
-  font-weight: bold;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    background: #e0ffe0;
-  }
+  color: black;
+  font-size: 12px;
 `;
 
 const FAQ = () => {
@@ -178,7 +152,7 @@ const FAQ = () => {
   return (
     <FAQContainer>
       <LogoHeader>
-        <h1>VERIDIS</h1>
+        <p>VERIDIS</p>
       </ LogoHeader>
       <FAQContent>
       <Header>
