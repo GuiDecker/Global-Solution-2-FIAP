@@ -17,9 +17,10 @@ export const StyledLogoHeader = styled.div`
 
 // FAQ
 
-export const FAQ = styled.div`
+export const StyledFAQ = styled.div`
   /*Logo Header*/
-  .logo-header {
+  .header {
+    width: 100%;
     display: flex;
     // justify-content: center;
     align-items: center;
