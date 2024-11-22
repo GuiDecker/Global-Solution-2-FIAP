@@ -1,11 +1,12 @@
 import React from "react";
+import { StyledLogoHeader }  from '../styled';
 
 const LogoHeader = () => {
     
     return(
         <div>
-            <header>
-                <h1>Veridis</h1>
+            <header className="logo-header">
+                <h1 className="logo">Veridis</h1>
             </header>
         </div>
     );
