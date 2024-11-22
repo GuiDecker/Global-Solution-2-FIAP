@@ -100,19 +100,19 @@ const FAQ = () => {
 
   const questions = [
     {
-      question: "O que é energia nuclear e como ela funciona?",
+      question: " Como o simulador de implementação de energia renovável poderá demonstrar, de forma interativa e educativa, os benefícios da energia renovável para diferentes regiões?",
       answer:
-        "Energia nuclear é a energia liberada durante a fissão ou fusão de átomos. Em usinas nucleares, a fissão do urânio aquece a água, gerando vapor para movimentar turbinas que produzem eletricidade.",
+        "O simulador permite que os usuários selecionem uma região via mapa ou entrada de dados, e exibirá gráficos e dados sobre redução de emissões de carbono, impacto ambiental e eficiência energética, utilizando APIs externas como Renewables.ninja e OpenWeatherMap.",
     },
     {
-      question: "Por que a energia nuclear é considerada uma fonte de baixo carbono?",
+      question: "O mapa interativo é suficientemente intuitivo para os usuários selecionem leigos?",
       answer:
-        "Diferentemente de combustíveis fósseis, a energia nuclear não emite dióxido de carbono (CO₂) durante a geração de eletricidade, ajudando a reduzir o impacto ambiental.",
+        "Sim, o mapa foi desenvolvido de forma a garantinr uma interface intuitiva, permitindo que o usuário realize a simulação nas regiões por meio de cliques, além de contar com ferramentas como zoom e marcadores que destacam a área selecionada. ",
     },
     {
-      question: "É seguro usar energia nuclear?",
+      question: "O assistente virtual e a seção de FAQ são suficientes para esclarecer dúvidas comuns e fornecer informações detalhadas sobre a plataforma e sobre as fontes renováveis?",
       answer:
-        "Sim, a energia nuclear é uma das fontes mais seguras quando operada adequadamente, com rígidos padrões de segurança para proteger pessoas e o meio ambiente.",
+        "Sim, a seção de FAQ abordará perguntas frequentes de forma direta e informativa. Além disso, o assistente virtual, que pretendemos disponibilizar em breve, usará inteligência artificial para responder a dúvidas mais complexas e fornecer informações adicionais personalizadas.",
     },
     {
       question: "Como o simulador ajuda na compreensão de fontes de energia?",
@@ -146,9 +146,9 @@ const FAQ = () => {
     },
     {
       question:
-        "Quais são os benefícios de usar fontes renováveis além da energia nuclear?",
+        "Quais são os benefícios de usar fontes renováveis apresentadas pelo simulador?",
       answer:
-        "Fontes renováveis, como solar e eólica, complementam a energia nuclear, fornecendo eletricidade limpa, diversificando a matriz energética e reduzindo dependências de combustíveis fósseis.",
+        "Fontes renováveis, como solar e eólica, complementam outras fontes de energia fornecendo eletricidade limpa, diversificando a matriz energética e reduzindo dependências de combustíveis fósseis.",
     },
   ];
 
